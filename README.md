@@ -1,4 +1,3 @@
-Here's a `README.md` file for your project, including all the installation instructions:
 
 ```markdown
 # Chitchat
