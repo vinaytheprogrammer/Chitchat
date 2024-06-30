@@ -3,7 +3,92 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #0C1844;
+    overflow-x: hidden;
 }
+
+/* BACKGROUND ANIMATION */
+
+.circle1, .circle2, .circle3, .circle4, .circle5 {
+    position: absolute;
+    filter: blur(160px);
+    z-index: -1;
+}
+
+.circle1, .circle4{
+    background-color: #FF6969;
+    width: 30vw;
+    height: 50vh;
+    top: 60px;
+    left: 90px;
+    animation: float-right 60s infinite linear;
+}
+
+.circle4{
+    background-color: #0C1844;
+    width: 20vw;
+    height: 20vh;
+    top: 60px;
+    left: 180px;
+}
+
+.circle2 {
+    background-color: #DBB5B5;
+    width: 30vw;
+    height: 30vh;
+    bottom: 60px;
+    right: 90px;
+}
+
+.circle3 {
+    background-color: #6FDCE3;
+    filter: blur(75px);
+    width: 8vw;
+    height: 12vh;
+    bottom: 260px;
+    right: 180px;
+}
+
+.circle2, .circle3 {
+    animation: float-left 30s infinite linear;
+}
+
+.circle5 {
+    background-color: #40A578;
+    width: 20vw;
+    height: 20vh;
+    top: -90px;
+    right: -150px;
+}
+
+@keyframes float-right {
+    0% {
+        translate: 0 0 0;
+    }
+
+    50% {
+        translate: 150% 25% 0;
+    }
+
+    100% {
+        translate: 0 0 0;
+    }
+}
+
+@keyframes float-left {
+    0% {
+        translate: 0 0 0;
+    }
+
+    50% {
+        translate: -200% -10% 0;
+    }
+    100% {
+        translate: 0 0 0;
+    }
+}
+
+/* ******************** */
 
 .chat-container {
     max-width: 600px;
