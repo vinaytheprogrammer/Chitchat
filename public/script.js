@@ -44,4 +44,5 @@ animationToggle.addEventListener('click', () => {
     for (circle of circles) {
         circle.classList.contains('move') ? circle.classList.remove('move') : circle.classList.add('move');
     }
+    animationToggle.classList.contains('button-off') ? animationToggle.classList.remove('button-off') : animationToggle.classList.add('button-off');
 })

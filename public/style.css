@@ -161,3 +161,19 @@ button:hover {
     margin: 5px 0;
     align-self: flex-start;
 }
+
+
+.ui {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-off{
+    background-color: #973131;
+}
+
+.button-off:hover{
+    background-color: #bc3939;
+}
