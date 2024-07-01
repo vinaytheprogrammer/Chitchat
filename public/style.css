@@ -3,66 +3,81 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #2b2b2b; /* Dark grey background */
+    color: #ddd; /* Light grey text color for better contrast */
 }
 
 .chat-container {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #444; /* Darker border to match the dark theme */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Slightly darker shadow */
+    background-color: #3b3b3b; /* Darker chat container background */
 }
 
 .chat-box {
     height: 500px;
     overflow-y: scroll;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
+    border-bottom: 1px solid #444; /* Darker border */
+    padding: 10px;
+    background-color: #4b4b4b; /* Darker chat box background */
+    border-radius: 10px;
 }
 
 #chat-form {
     margin-top: 20px;
     display: flex;
+    border-top: 1px solid #444; /* Darker border */
+    padding-top: 10px;
 }
 
 #user-input {
     flex: 1;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    padding: 10px;
+    border: 1px solid #555; /* Darker border */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #555; /* Darker input background */
+    color: #ddd; /* Light grey text color */
 }
 
 button {
-    padding: 5px 10px;
+    padding: 10px 20px;
     margin-left: 10px;
-    background-color: #053261;
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 button:hover {
-    background-color: #08488d;
+    background-color: #0056b3;
 }
 
 .user-message {
     text-align: right;
-    background-color: #2b343e;
+    background-color: #007bff;
     color: white;
-    border-radius: 5px;
-    padding: 5px 10px;
+    border-radius: 20px;
+    padding: 10px 15px;
     margin: 5px 0;
     align-self: flex-end;
+    max-width: 80%;
+    word-wrap: break-word;
 }
 
 .bot-message {
     text-align: left;
-    background-color: #f0f0f0;
-    color: #333;
-    border-radius: 5px;
-    padding: 5px 10px;
+    background-color: #6c757d;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 15px;
     margin: 5px 0;
     align-self: flex-start;
+    max-width: 80%;
+    word-wrap: break-word;
 }
