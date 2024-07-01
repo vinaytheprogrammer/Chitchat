@@ -96,7 +96,7 @@ body {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);;
 }
 
 .chat-box {
@@ -104,6 +104,7 @@ body {
     overflow-y: scroll;
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
+    overflow-x: hidden
 }
 
 #chat-form {
@@ -140,6 +141,12 @@ button:hover {
     padding: 5px 10px;
     margin: 5px 0;
     align-self: flex-end;
+    max-width: 100%;
+}
+
+.user-message p {
+    width: 100%;
+    word-wrap: break-word;
 }
 
 .bot-message {

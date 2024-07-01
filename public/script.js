@@ -29,7 +29,9 @@ chatForm.addEventListener('submit', async (e) => {
 function appendMessage(sender, message) {
     const messageElement = document.createElement('div');
     messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
-    messageElement.innerText = message;
+    const messageContent = document.createElement('p');
+    messageContent.innerText = message;
+    messageElement.appendChild(messageContent);
     chatBox.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
