@@ -1,6 +1,8 @@
 const chatBox = document.getElementById('chat-box');
 const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
+const animationToggle = document.getElementById('toggle-animation');
+const bgCircles  = document.getElementById('bg-circles');
 
 chatForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -35,3 +37,11 @@ function appendMessage(sender, message) {
     chatBox.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
+
+animationToggle.addEventListener('click', () => {
+    let circles = bgCircles.children;
+    console.log(circles);
+    for (circle of circles) {
+        circle.classList.contains('move') ? circle.classList.remove('move') : circle.classList.add('move');
+    }
+})

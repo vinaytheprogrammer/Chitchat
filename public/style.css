@@ -15,13 +15,12 @@ body {
     z-index: -1;
 }
 
-.circle1, .circle4{
+.circle1{
     background-color: #FF6969;
     width: 30vw;
     height: 50vh;
     top: 60px;
     left: 90px;
-    animation: float-right 60s infinite linear;
 }
 
 .circle4{
@@ -49,8 +48,12 @@ body {
     right: 180px;
 }
 
-.circle2, .circle3 {
+.circle2.move, .circle3.move {
     animation: float-left 30s infinite linear;
+}
+
+.circle1.move, .circle4.move {
+    animation: float-right 60s infinite linear;
 }
 
 .circle5 {
