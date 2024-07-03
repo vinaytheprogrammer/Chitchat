@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apna Web Interface</title>
+    <title>Chit-Chat Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <div class="chat-container">
         <h1 class="animated-heading">Welcome to Chit-Chat</h1>
-        <div class="chat-box" id="chat-box"></div>
+        <div class="chat-box" id="chat-box">
+            <!-- Sample message with emoji reactions -->
+            <div class="message bot-message">
+                <p>Hello! How can I assist you today?</p>
+                <div class="emoji-reactions">
+                    <button class="emoji-btn" data-emoji="👍">👍</button>
+                    <button class="emoji-btn" data-emoji="❤️">❤️</button>
+                    <button class="emoji-btn" data-emoji="😂">😂</button>
+                    <button class="emoji-btn" data-emoji="😮">😮</button>
+                </div>
+            </div>
+        </div>
         <form id="chat-form">
             <input type="text" id="user-input" placeholder="Type a message...">
             <button type="submit">Send</button>
@@ -19,5 +29,4 @@
     </div>
     <script src="script.js"></script>
 </body>
-
 </html>
