@@ -10,18 +10,44 @@
     opacity: 1;
   }
 }
-
-@keyframes gradientBackground {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+html {
+  height: 100%;
+  /* max-height: 600px; */
+  width: 1000px;
+  background-color: hsla(200,40%,30%,.4);
+  background-image:   
+      url('https://78.media.tumblr.com/cae86e76225a25b17332dfc9cf8b1121/tumblr_p7n8kqHMuD1uy4lhuo1_540.png'), 
+      url('https://78.media.tumblr.com/66445d34fe560351d474af69ef3f2fb0/tumblr_p7n908E1Jb1uy4lhuo1_1280.png'),
+      url('https://78.media.tumblr.com/8cd0a12b7d9d5ba2c7d26f42c25de99f/tumblr_p7n8kqHMuD1uy4lhuo2_1280.png'),
+      url('https://78.media.tumblr.com/5ecb41b654f4e8878f59445b948ede50/tumblr_p7n8on19cV1uy4lhuo1_1280.png'),
+      url('https://78.media.tumblr.com/28bd9a2522fbf8981d680317ccbf4282/tumblr_p7n8kqHMuD1uy4lhuo3_1280.png');
+  background-repeat: repeat-x;
+  background-position: 
+      0 20%,
+      0 100%,
+      0 50%,
+      0 100%,
+      0 0;
+  background-size: 
+      2500px,
+      800px,
+      500px 200px,
+      1000px,
+      400px 260px;
+  animation: 50s para infinite linear;
 }
+
+@keyframes para {
+  100% {
+      background-position: 
+      -5000px 20%,
+      -800px 95%,
+      500px 50%,
+      1000px 100%,
+      400px 0;
+      }
+}
+
 
 body {
   font-family: "Nunito", sans-serif;
@@ -30,13 +56,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(270deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
-  background-size: 800% 800%;
-  animation: gradientBackground 15s ease infinite;
+  height: 100vh; 
+  position: relative;
+  left: 100px;
 }
 
-.chat-container {
+.container {
   width: 90%;
   max-width: 600px;
   background: rgba(255, 255, 255, 0.9);
@@ -103,7 +128,7 @@ body {
   padding: 12px 24px;
   border: none;
   border-radius: 20px;
-  background: #007bff;
+  background: green;
   color: #fff;
   cursor: pointer;
   transition: background 0.3s;
