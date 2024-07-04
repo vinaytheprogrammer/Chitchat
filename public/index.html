@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chit-Chat Interface</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600&display=swap" rel="stylesheet">
+    <title>Apna Web Interface</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="chat-container">
         <h1 class="animated-heading">Welcome to Chit-Chat</h1>
+        <div class="chat-info">
+            <span id="message-count">0 messages</span>
+            <span id="online-status">Online</span>
+        </div>
         <div class="chat-box" id="chat-box">
-            <!-- Sample message with emoji reactions -->
+            <!-- Sample messages -->
             <div class="message bot-message">
                 <p>Hello! How can I assist you today?</p>
                 <div class="emoji-reactions">
@@ -21,10 +24,19 @@
                     <button class="emoji-btn" data-emoji="😮">😮</button>
                 </div>
             </div>
+            <div class="message user-message">
+                <p>Hi! I have a question about cute chat apps.</p>
+            </div>
+        </div>
+        <div id="typing-indicator" class="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
         <form id="chat-form">
             <input type="text" id="user-input" placeholder="Type a message...">
             <button type="submit">Send</button>
+            <button type="button" id="voice-btn" title="Record Voice Message">🎤</button>
         </form>
     </div>
     <script src="script.js"></script>
