@@ -75,11 +75,19 @@ body {
 
 .animated-heading {
   font-size: 2.2em;
-  color: #007bff;
+  color: #59a3f3;
   text-align: center;
   margin: 20px 0;
   font-family: "Nunito", sans-serif;
   animation: slideIn 1s ease-out;
+}
+
+.animated-heading:hover{
+  background-color: black;
+  color: cyan;
+  border-radius: 20px;
+  width: auto;
+  font-family: italic;
 }
 
 .chat-box {
@@ -101,6 +109,11 @@ body {
 .user-message {
   background: #007bff;
   margin-left: 90px;
+}
+
+.user-message:hover{
+  font-size:20px ;
+  filter: drop-shadow(1px 1px 20px black);
 }
 
 .bot-message {
@@ -135,5 +148,5 @@ body {
 }
 
 #chat-form button:hover {
-  background: #0056b3;
+  background: #98b0ca;
 }
