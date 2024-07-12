@@ -4,17 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apna Web Interface</title>
+    <title>Apna ChitChat</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div class="background-controls">
+        <label for="bg-image-input">Choose background image:</label>
+        <input type="file" id="bg-image-input" name="bg-image" accept="image/*">
+
+        <label for="bg-color-input">Choose background color:</label>
+        <input type="color" id="bg-color-input" name="bg-color">
+
+        <button id="reset-bg">Reset Background</button>
+    </div>
     <div class="chat-container">
+        <h1 class="animated-heading">Namaste!! Lets Chit-Chat</h1>
+    <div class="container">
         <h1 class="animated-heading">Welcome to Chit-Chat</h1>
         <div class="chat-box" id="chat-box"></div>
         <form id="chat-form">
-            <input type="text" id="user-input" placeholder="Type a message...">
-            <button type="submit">Send</button>
+            <label for="user-input" class="visually-hidden">Enter your message:</label>
+            <input type="text" id="user-input" name="user-input"
+                placeholder="Starting our conversation, how can I assist you?">
+            <button type="submit" id="Sendbtn" aria-label="Send message">&gt;</button>
         </form>
     </div>
     <script src="script.js"></script>
