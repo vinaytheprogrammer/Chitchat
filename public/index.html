@@ -6,17 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apna Web Interface</title>
     <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
     <div class="chat-container">
-        <h1 class="animated-heading">Welcome to Chit-Chat</h1>
+        <h1 class="animated-heading">Let's do Chit-Chat</h1>
         <div class="chat-box" id="chat-box"></div>
         <form id="chat-form">
+            <button type="button" id="voice-btn"><i class='bx bx-volume-full'></i></button>
+            <button type="button" id="stop-btn"><i class='bx bx-stop-circle'></i></button>
             <input type="text" id="user-input" placeholder="Type a message...">
-            <button type="submit">Send</button>
+            <button id="telegram-button"><i class='bx bxl-telegram'></i></button>
         </form>
+        <button id="scroll-down-button"><i class='bx bx-down-arrow-alt'></i></button>
     </div>
+
     <script src="script.js"></script>
 </body>
 

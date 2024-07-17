@@ -37,8 +37,9 @@ body {
 }
 
 .chat-container {
-  width: 90%;
+  width: 80%;
   max-width: 600px;
+  height: 70%;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -46,11 +47,12 @@ body {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  position: relative;
 }
 
 .animated-heading {
-  font-size: 2.2em;
-  color: #007bff;
+  font-size: 2.5em;
+  color: #005f73; 
   text-align: center;
   margin: 20px 0;
   font-family: "Nunito", sans-serif;
@@ -59,56 +61,135 @@ body {
 
 .chat-box {
   flex: 1;
-  padding: 15px;
-  background: #e5e5ea;
+  padding: 20px;
+  background: #edf6f9; 
   overflow-y: auto;
-  font-size: 1.1em;
+  font-size: 1.2em;
 }
 
 .message {
-  padding: 12px;
-  border-radius: 12px;
-  margin-bottom: 12px;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
   max-width: 80%;
-  color: #fff;
+  color: #333; 
+  display: flex;
+  align-items: center;
 }
 
 .user-message {
-  background: #007bff;
-  margin-left: 90px;
+  background: #005f73; 
+  margin-left: 100px;
+  color: #fff; 
+  flex-direction: row-reverse;
 }
 
 .bot-message {
-  background: #ff9500;
+  background: #ffb703; 
   align-self: flex-start;
+  color: #fff; 
 }
 
 #chat-form {
   display: flex;
-  padding: 12px;
+  padding: 15px;
   border-top: 1px solid #ddd;
-  background: #f9f9f9;
+  background: #edf6f9; 
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #user-input {
   flex: 1;
-  padding: 12px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 20px;
   margin-right: 10px;
-  font-size: 1.1em;
+  font-size: 1.2em;
+  background: #fff; 
 }
 
 #chat-form button {
-  padding: 12px 24px;
   border: none;
   border-radius: 20px;
-  background: #007bff;
-  color: #fff;
+  background: #005f73; 
+  color: #fff; 
   cursor: pointer;
   transition: background 0.3s;
 }
 
 #chat-form button:hover {
-  background: #0056b3;
+  background: #0a9396; 
+}
+
+#scroll-down-button {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px;
+  border: none;
+  background: #0a9396; 
+  color: #FFFFFF; 
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  transition: background 0.3s, transform 0.3s ease;
+  font-size: 1.2em; 
+}
+
+#scroll-down-button:hover {
+  background: #0a9396; 
+  transform: translateY(5px) translateX(-50%);
+}
+
+#telegram-button {
+  padding: 15px 20px; 
+  border: none;
+  background: #db8e00; 
+  color: #fff; 
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 1.2rem;
+}
+
+#telegram-button:hover {
+  background: #ffbc04; 
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  align-self: flex-start;
+}
+
+.user-message .logo {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.user-logo {
+  background: url('user-icon.png') no-repeat center center;
+  background-size: cover;
+}
+
+.bot-logo {
+  background: url('bot-icon.png') no-repeat center center;
+  background-size: cover;
+} 
+
+#voice-btn, #stop-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: #0a9396;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 10px;
 }
