@@ -5,6 +5,44 @@ const quickRepliesContainer = document.getElementById('quick-replies');
 const voiceButton = document.getElementById('voice-btn');
 const stopButton = document.getElementById('stop-btn');
 const scrollDownButton = document.getElementById('scroll-down-button'); // Added scroll down button reference
+const settingsBtn = document.getElementById('settings-btn');
+const settingsDropdown = document.getElementById('settings-dropdown');
+const bgColorInput = document.getElementById('bg-color');
+const bgImageInput = document.getElementById('bg-image');
+
+settingsBtn.addEventListener('click', () => {
+    settingsDropdown.style.display = settingsDropdown.style.display === 'block' ? 'none' : 'block';
+});
+
+bgColorInput.addEventListener('change', (e) => {
+    document.body.style.backgroundImage = 'none';
+    document.body.style.backgroundColor = e.target.value;
+});
+
+bgImageInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.body.style.backgroundImage = `url(${e.target.result})`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+// Function to set default background
+function setDefaultBackground() {
+    document.body.style.backgroundImage = 'none';
+    document.body.style.background = 'linear-gradient(270deg, #ff7e5f, #feb47b, #86a8e7, #91eae4)';
+    document.body.style.backgroundSize = '800% 800%';
+    document.body.style.animation = 'gradientBackground 15s ease infinite';
+}
+
+// Set default background on page load
+setDefaultBackground();
+
 
 let recognition; // SpeechRecognition object
 let synth = window.speechSynthesis; // SpeechSynthesis object

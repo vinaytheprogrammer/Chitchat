@@ -10,6 +10,20 @@
 </head>
 
 <body>
+    <div class="setting">
+        <button id="settings-btn"><i class='bx bx-cog'></i></button>
+        <div id="settings-dropdown" class="settings-dropdown">
+            <h3>Settings</h3>
+            <div class="setting-option">
+                <label for="bg-color">Background Color:</label>
+                <input type="color" id="bg-color" value="#ff7e5f">
+            </div>
+            <div class="setting-option">
+                <label for="bg-image">Background Image:</label>
+                <input type="file" id="bg-image" accept="image/*">
+            </div>
+        </div>
+    </div>
     <div class="chat-container">
         <h1 class="animated-heading">Let's do Chit-Chat</h1>
         <div class="chat-box" id="chat-box"></div>
