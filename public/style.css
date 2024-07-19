@@ -193,3 +193,64 @@ body {
   font-size: 18px;
   margin-right: 10px;
 }
+
+.setting {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+#settings-btn {
+  background: #005f73;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#settings-btn:hover {
+  background: #0a9396;
+}
+
+.settings-dropdown {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.settings-dropdown h3 {
+  margin-top: 0;
+  color: #005f73;
+}
+
+.setting-option {
+  margin-bottom: 15px;
+}
+
+.setting-option label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.setting-option input[type="color"] {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.setting-option input[type="file"] {
+  width: 100%;
+}
