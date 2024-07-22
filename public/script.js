@@ -1,10 +1,10 @@
 const chatBox = document.getElementById('chat-box');
 const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
-const quickRepliesContainer = document.getElementById('quick-replies');
+const imageInput = document.getElementById('image-input');
 const voiceButton = document.getElementById('voice-btn');
 const stopButton = document.getElementById('stop-btn');
-const scrollDownButton = document.getElementById('scroll-down-button'); // Added scroll down button reference
+const scrollDownButton = document.getElementById('scroll-down-button');
 const settingsBtn = document.getElementById('settings-btn');
 const settingsDropdown = document.getElementById('settings-dropdown');
 const bgColorInput = document.getElementById('bg-color');
@@ -43,12 +43,10 @@ function setDefaultBackground() {
 // Set default background on page load
 setDefaultBackground();
 
+let recognition;
+let synth = window.speechSynthesis;
+let speaking = false;
 
-let recognition; // SpeechRecognition object
-let synth = window.speechSynthesis; // SpeechSynthesis object
-let speaking = false; // Flag to track speech synthesis status
-
-// Check if SpeechRecognition is supported
 if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
     recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.continuous = false;
@@ -57,7 +55,7 @@ if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         userInput.value = transcript;
-        chatForm.dispatchEvent(new Event('submit')); // Simulate form submission
+        chatForm.dispatchEvent(new Event('submit'));
     };
 
     recognition.onerror = (event) => {
@@ -65,47 +63,56 @@ if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
     };
 } else {
     console.error('Speech recognition not supported');
-    voiceButton.style.display = 'none'; // Hide voice button if not supported
+    voiceButton.style.display = 'none';
 }
 
-// Event listener for form submission
 chatForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const userMessage = userInput.value.trim();
-    if (userMessage === '') return;
+    const imageFile = imageInput.files[0];
 
-    appendMessage('user', userMessage);
+    if (userMessage === '' && !imageFile) return;
 
-    try {
-        const response = await fetch('/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ message: userMessage })
-        });
-        const data = await response.json();
-        appendMessage('bot', data.message);
-
-        // Clear existing quick replies
-        clearQuickReplies();
-
-        // Show quick replies if available
-        if (data.quickReplies && data.quickReplies.length > 0) {
-            showQuickReplies(data.quickReplies);
+    if (userMessage) {
+        appendMessage('user', userMessage);
+        try {
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userMessage })
+            });
+            const data = await response.json();
+            appendMessage('bot', data.message);
+            speak(data.message);
+        } catch (err) {
+            console.error('Error:', err);
         }
-
-        // Speak bot's response
-        speak(data.message);
-    } catch (err) {
-        console.error('Error:', err);
     }
 
-    userInput.value = ''; // Clear the input immediately after submission
-    scrollChatToBottom(); // Scroll chat to bottom after new message is added
+    if (imageFile) {
+        const formData = new FormData();
+        formData.append('image', imageFile);
+        appendMessage('user', 'Image uploaded');
+        try {
+            const response = await fetch('/describe-image', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            appendMessage('bot', data.description);
+            speak(data.description);
+        } catch (err) {
+            console.error('Error:', err);
+        }
+    }
+
+    userInput.value = '';
+    imageInput.value = '';
+    scrollChatToBottom();
 });
 
-// Function to append messages to chat box
 function appendMessage(sender, message) {
     const messageElement = document.createElement('div');
     messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
@@ -122,31 +129,31 @@ function appendMessage(sender, message) {
     messageElement.appendChild(logoElement);
     messageElement.appendChild(textElement);
     chatBox.appendChild(messageElement);
-    scrollChatToBottom(); // Ensure chat box scrolls to bottom after new message is appended
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// Function to show quick replies
-function showQuickReplies(replies) {
-    replies.forEach(reply => {
-        const replyButton = document.createElement('button');
-        replyButton.classList.add('quick-reply');
-        replyButton.innerText = reply.text;
-        replyButton.addEventListener('click', () => {
-            userInput.value = reply.payload; // Set user input to the quick reply payload
-            chatForm.dispatchEvent(new Event('submit')); // Simulate form submission
-        });
-        quickRepliesContainer.appendChild(replyButton);
+document.addEventListener("DOMContentLoaded", () => {
+    const chatBox = document.getElementById("chat-box");
+    const scrollDownButton = document.getElementById("scroll-down-button");
+
+    chatBox.addEventListener("scroll", () => {
+        if (chatBox.scrollTop + chatBox.clientHeight < chatBox.scrollHeight) {
+            scrollDownButton.style.display = 'block';
+        } else {
+            scrollDownButton.style.display = 'none';
+        }
     });
-}
 
-// Function to clear quick replies
-function clearQuickReplies() {
-    while (quickRepliesContainer.firstChild) {
-        quickRepliesContainer.removeChild(quickRepliesContainer.firstChild);
-    }
-}
+    scrollDownButton.addEventListener("click", () => {
+        chatBox.scrollTo({
+            top: chatBox.scrollHeight,
+            behavior: 'smooth'
+        });
+    });
 
-// Event listener for voice button click
+    scrollDownButton.style.display = 'none';
+});
+
 voiceButton.addEventListener('click', () => {
     if (!speaking) {
         const botResponse = chatBox.lastElementChild.innerText;
@@ -154,7 +161,6 @@ voiceButton.addEventListener('click', () => {
     }
 });
 
-// Event listener for stop button click
 stopButton.addEventListener('click', () => {
     if (synth.speaking) {
         synth.cancel();
@@ -162,56 +168,12 @@ stopButton.addEventListener('click', () => {
     }
 });
 
-// Function to speak text using SpeechSynthesis
 function speak(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     synth.speak(utterance);
     speaking = true;
 
-    // Monitor when speech ends to update the speaking flag
     utterance.onend = () => {
         speaking = false;
     };
 }
-
-function appendMessage(sender, message) {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
-            
-            const logoElement = document.createElement('img');
-            logoElement.classList.add('logo', sender === 'user' ? 'user-logo' : 'bot-logo');
-            logoElement.src = sender === 'user' ? 'user-icon.png' : 'bot-icon.png';
-            logoElement.alt = sender === 'user' ? 'User Logo' : 'Bot Logo';
-            
-            const textElement = document.createElement('div');
-            textElement.classList.add('text');
-            textElement.innerText = message;
-            
-            messageElement.appendChild(logoElement);
-            messageElement.appendChild(textElement);
-            chatBox.appendChild(messageElement);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-        
-        document.addEventListener("DOMContentLoaded", () => {
-            const chatBox = document.getElementById("chat-box");
-            const scrollDownButton = document.getElementById("scroll-down-button");
-        
-        chatBox.addEventListener("scroll", () => {
-                if (chatBox.scrollTop + chatBox.clientHeight < chatBox.scrollHeight) {
-                    scrollDownButton.style.display = 'block';
-                } else {
-                    scrollDownButton.style.display = 'none';
-                }
-            });
-        
-            scrollDownButton.addEventListener("click", () => {
-                chatBox.scrollTo({
-                top: chatBox.scrollHeight,
-                behavior: 'smooth'
-                });
-            });
-        
-        scrollDownButton.style.display = 'none';
-        });
-    
