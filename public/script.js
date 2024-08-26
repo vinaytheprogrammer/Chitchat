@@ -1,7 +1,6 @@
 const chatBox = document.getElementById('chat-box');
 const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
-const imageInput = document.getElementById('image-input');
 const voiceButton = document.getElementById('voice-btn');
 const stopButton = document.getElementById('stop-btn');
 const scrollDownButton = document.getElementById('scroll-down-button');
@@ -17,6 +16,7 @@ settingsBtn.addEventListener('click', () => {
 bgColorInput.addEventListener('change', (e) => {
     document.body.style.backgroundImage = 'none';
     document.body.style.backgroundColor = e.target.value;
+    settingsDropdown.style.display = 'none';  // Hide dropdown after setting color
 });
 
 bgImageInput.addEventListener('change', (e) => {
@@ -27,6 +27,7 @@ bgImageInput.addEventListener('change', (e) => {
             document.body.style.backgroundImage = `url(${e.target.result})`;
             document.body.style.backgroundSize = 'cover';
             document.body.style.backgroundPosition = 'center';
+            settingsDropdown.style.display = 'none';  // Hide dropdown after setting image
         }
         reader.readAsDataURL(file);
     }
@@ -69,9 +70,8 @@ if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
 chatForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const userMessage = userInput.value.trim();
-    const imageFile = imageInput.files[0];
 
-    if (userMessage === '' && !imageFile) return;
+    if (userMessage === '') return;
 
     if (userMessage) {
         appendMessage('user', userMessage);
@@ -91,25 +91,7 @@ chatForm.addEventListener('submit', async (e) => {
         }
     }
 
-    if (imageFile) {
-        const formData = new FormData();
-        formData.append('image', imageFile);
-        appendMessage('user', 'Image uploaded');
-        try {
-            const response = await fetch('/describe-image', {
-                method: 'POST',
-                body: formData
-            });
-            const data = await response.json();
-            appendMessage('bot', data.description);
-            speak(data.description);
-        } catch (err) {
-            console.error('Error:', err);
-        }
-    }
-
     userInput.value = '';
-    imageInput.value = '';
     scrollChatToBottom();
 });
 
